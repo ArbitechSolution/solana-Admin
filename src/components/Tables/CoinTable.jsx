@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import CoinHistorySearchBar from "../SearBars/CoinHistorySearchBar";
+import EditModal from "../EditModal/EditModal";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const columns = [
   { id: "date", label: "Date", minWidth: 200 },
@@ -264,6 +266,7 @@ const rows = [
 
 export default function CoinTable() {
   const [page, setPage] = React.useState(0);
+  const[modelShow, setModelShow]=React.useState(false)
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleChangePage = (event, newPage) => {
@@ -290,6 +293,7 @@ export default function CoinTable() {
                   style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
+                  
                 </TableCell>
               ))}
             </TableRow>
@@ -307,9 +311,65 @@ export default function CoinTable() {
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
+                          
                         </TableCell>
+                       
                       );
                     })}
+               
+   
+               {/* <!-- Button trigger modal --> */}
+<button type="button" class="btn shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<BorderColorIcon/>
+</button>
+
+{/* <!-- Modal --> */}
+<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalToggleLabel">Status Action</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body text-start">
+      <div>
+      <div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
+  <label className="htmlForm-check-label" for="exampleRadios1">
+   Deposite pending
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+  <label className="htmlForm-check-label" for="exampleRadios2">
+   LockedUp 
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
+  <label className="htmlForm-check-label" for="exampleRadios3">
+    Withdraw Available
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" />
+  <label className="htmlForm-check-label" for="exampleRadios4">
+    Withdraw Pending
+  </label>
+</div>
+      </div>
+      </div>
+    <div className="d-flex justify-content-around mb-5 px-3" style={{gap:"12px"}}>
+      <button className='btn btn-outline-success w-100'>Save</button>
+      <button className='btn btn-danger w-100'>Cancal</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
+                
                   </TableRow>
                 );
               })}

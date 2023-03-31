@@ -80,7 +80,7 @@ export default function SideNav() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <div className="sideBarBG">
+      <div className="sideBarBG d-none d-md-block">
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>
             <IconButton
@@ -96,7 +96,7 @@ export default function SideNav() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List>
+          <List >
             <ListItem
               disablePadding
               sx={{ display: "block" }}

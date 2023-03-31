@@ -195,7 +195,7 @@ export default function NavBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
+            {/* <IconButton
               size="large"
               aria-label="show 4 new mails"
               color="inherit"
@@ -212,7 +212,7 @@ export default function NavBar() {
               <Badge badgeContent={17} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               size="large"
               edge="end"
@@ -231,10 +231,11 @@ export default function NavBar() {
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
+              // onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon />
+                      <AccountCircle />
+
             </IconButton>
           </Box>
         </Toolbar>
