@@ -34,7 +34,7 @@ const CanvousNavbar = () => {
         <div className="offcanvas-body ">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-start ">
             <li class="nav-item">
-              <Link class="nav-link text-white" aria-current="page" to="/">
+              <Link class="nav-link text-white" aria-current="page" to="/MemberList">
                 Members List
               </Link>
             </li>

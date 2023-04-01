@@ -5,6 +5,8 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -51,16 +53,62 @@ export default function CoinHistorySearchBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar className="navBarBg d-flex justify-content-end">
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search with type…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+      <Toolbar className="navBarBg row ">
+          
+          <div className="fs-4 col-7 text-warning text-md-end text-start">
+          Coin Order History
+          </div>
+          <div className="text-end col-5 d-flex justify-content-end">
+        <button type="button" className="btn  btn-outline-warning shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+Status Action
+</button>
+
+
+<div className="modal fade " id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content  bg-warning text-white">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalToggleLabel">Status Action</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body text-start">
+      <div>
+      <div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
+  <label className="htmlForm-check-label" for="exampleRadios1">
+   Deposite pending
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+  <label className="htmlForm-check-label" for="exampleRadios2">
+   LockedUp 
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
+  <label className="htmlForm-check-label" for="exampleRadios3">
+    Withdraw Available
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" />
+  <label className="htmlForm-check-label" for="exampleRadios4">
+    Withdraw Pending
+  </label>
+</div>
+      </div>
+      </div>
+    <div className="d-flex justify-content-around mb-5 px-3" style={{gap:"12px"}}>
+      <button className='btn btn-outline-success w-100'>Save</button>
+      <button className='btn btn-danger w-100'>Cancal</button>
+    </div>
+    </div>
+  </div>
+</div></div>
+          
+        
+
         </Toolbar>
       </AppBar>
     </Box>

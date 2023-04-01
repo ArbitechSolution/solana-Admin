@@ -51,7 +51,12 @@ export default function MemberSearchBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar className="navBarBg d-flex justify-content-end">
+      <Toolbar className="navBarBg row ">
+          
+          <div className="fs-4 col-7 text-warning text-md-end text-start">
+          Members List
+          </div>
+          <div className="text-end col-5 d-flex justify-content-end">
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -60,8 +65,13 @@ export default function MemberSearchBar() {
               placeholder="Search with name…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search></div>
+          
+        
+
         </Toolbar>
+        
+       
       </AppBar>
     </Box>
   );

@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import ReferralSearchBar from "../SearBars/ReferralSearchBar";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const columns = [
   { id: "date", label: "Date", minWidth: 200 },
@@ -273,13 +274,13 @@ export default function ReferralTable() {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <ReferralSearchBar></ReferralSearchBar>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  className="fw-bold "
+                  className="fw-bold  bgColors text-warning"
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
@@ -298,20 +299,68 @@ export default function ReferralTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className="navBarBg121">
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
                         </TableCell>
                       );
                     })}
+<button type="button" className="btn  btn-outline-warning shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<BorderColorIcon/>
+</button>
+
+{/* <!-- Modal --> */}
+<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div className="modal-dialog modal-dialog-centered">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="exampleModalToggleLabel">Status Action</h5>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body text-start">
+      <div>
+      <div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked/>
+  <label className="htmlForm-check-label" for="exampleRadios1">
+   Deposite pending
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2"/>
+  <label className="htmlForm-check-label" for="exampleRadios2">
+   LockedUp 
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" />
+  <label className="htmlForm-check-label" for="exampleRadios3">
+    Withdraw Available
+  </label>
+</div>
+<div className="form-check">
+  <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="option4" />
+  <label className="htmlForm-check-label" for="exampleRadios4">
+    Withdraw Pending
+  </label>
+</div>
+      </div>
+      </div>
+    <div className="d-flex justify-content-around mb-5 px-3" style={{gap:"12px"}}>
+      <button className='btn btn-outline-success w-100'>Save</button>
+      <button className='btn btn-danger w-100'>Cancal</button>
+    </div>
+    </div>
+  </div>
+</div>
+
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -319,7 +368,7 @@ export default function ReferralTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
     </Paper>
   );
 }

@@ -80,9 +80,9 @@ export default function SideNav() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <div className="sideBarBG d-none d-md-block">
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
+      <div className=" d-none d-md-block " >
+        <Drawer variant="permanent" open={open} className="sideBarBG">
+          <DrawerHeader >
             <IconButton
               onClick={() => {
                 updateOpen(!open);
@@ -101,7 +101,7 @@ export default function SideNav() {
               disablePadding
               sx={{ display: "block" }}
               onClick={() => {
-                navigate("/");
+                navigate("/MemberList");
               }}
             >
               <ListItemButton
@@ -118,7 +118,7 @@ export default function SideNav() {
                     justifyContent: "center",
                   }}
                 >
-                  <GroupAddOutlinedIcon />
+                  <GroupAddOutlinedIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
                   primary="Member List"
@@ -147,7 +147,7 @@ export default function SideNav() {
                     justifyContent: "center",
                   }}
                 >
-                  <ShoppingCartCheckoutSharpIcon />
+                  <ShoppingCartCheckoutSharpIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
                   primary="Coin Order History"
@@ -176,7 +176,7 @@ export default function SideNav() {
                     justifyContent: "center",
                   }}
                 >
-                  <CurrencyExchangeSharpIcon />
+                  <CurrencyExchangeSharpIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
                   primary="Referral Cash Reward"

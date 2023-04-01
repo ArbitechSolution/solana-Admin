@@ -11,8 +11,8 @@ const CoinOrderHistory = () => {
       <Box height={70} />
       <Box sx={{ display: "flex" }}>
         <SideNav></SideNav>
-        <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto" }}>
-          <h1>Coin Order History</h1>
+        <Box component="main" sx={{ flexGrow: 1, p: 3, overflow: "auto", mt:8 }}>
+          {/* <h1>Coin Order History</h1> */}
           <CoinTable />
         </Box>
       </Box>

@@ -13,10 +13,10 @@ const MemberList = () => {
         <SideNav></SideNav>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, overflow: "auto" }}
+          sx={{ flexGrow: 1, p: 3, overflow: "auto", mt:8 }}
           
         >
-          <h1>Members List</h1>
+          {/* <h1>Members List</h1> */}
           <MemberListTable></MemberListTable>
         </Box>
       </Box>

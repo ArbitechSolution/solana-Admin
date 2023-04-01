@@ -17,6 +17,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useAppStore } from "../appStore";
 import CanvousNavbar from "./CanvousNavbar/CanvousNavbar";
+import { Link } from "react-router-dom";
 
 const AppBar = styled(
   MuiAppBar,
@@ -170,7 +171,7 @@ export default function NavBar() {
       <AppBar position="fixed">
         <Toolbar className="navBarBg">
           <IconButton
-            className="d-none d-md-block"
+            className="d-none d-md-block text-warning"
             size="large"
             edge="start"
             color="inherit"
@@ -181,10 +182,10 @@ export default function NavBar() {
             <MenuIcon />
           </IconButton>
           <CanvousNavbar />
-          <Typography variant="h6" noWrap component="div">
-            Coin Buy
+          <Typography variant="h6" noWrap component="div"  >
+          <Link to="/" className="text-warning text-decoration-none"> Coin Buy</Link> 
           </Typography>
-          <Search sx={{ display: { xs: "none", sm: "block" } }}>
+          {/* <Search sx={{ display: { xs: "none", sm: "block" } }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
@@ -192,7 +193,7 @@ export default function NavBar() {
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
-          </Search>
+          </Search> */}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/* <IconButton
@@ -213,7 +214,7 @@ export default function NavBar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton> */}
-            <IconButton
+            {/* <IconButton
               size="large"
               edge="end"
               aria-label="account of current user"
@@ -223,7 +224,7 @@ export default function NavBar() {
               color="inherit"
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

@@ -310,13 +310,13 @@ export default function MemberListTable() {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <MemberSearchBar></MemberSearchBar>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer className="navBarBg121 text-warning"sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  className="fw-bold "
+                  className="fw-bold  bgColors text-warning "
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
@@ -335,7 +335,7 @@ export default function MemberListTable() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className="navBarBg121">
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
@@ -348,7 +348,7 @@ export default function MemberListTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
+      {/* <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -356,7 +356,7 @@ export default function MemberListTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /> */}
     </Paper>
   );
 }

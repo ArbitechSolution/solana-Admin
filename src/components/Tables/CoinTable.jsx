@@ -279,15 +279,15 @@ export default function CoinTable() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper  sx={{ width: "100%", overflow: "hidden" }}>
       <CoinHistorySearchBar></CoinHistorySearchBar>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+      <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table  ">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
-                  className="fw-bold "
+                  className="fw-bold  bgColors text-warning"
                   key={column.id}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
@@ -298,16 +298,16 @@ export default function CoinTable() {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody >
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id} >
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className="navBarBg121">
                           {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
@@ -319,8 +319,8 @@ export default function CoinTable() {
                
    
                {/* <!-- Button trigger modal --> */}
-<button type="button" class="btn shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
-<BorderColorIcon/>
+<button type="button" className="btn  btn-outline-warning shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<BorderColorIcon />
 </button>
 
 {/* <!-- Modal --> */}
@@ -376,7 +376,9 @@ export default function CoinTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      {/* <div className="bgColor">
       <TablePagination
+       className=" text-warning"
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -384,7 +386,7 @@ export default function CoinTable() {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      /></div> */}
     </Paper>
   );
 }

@@ -13,10 +13,10 @@ const ReferealCashReward = () => {
         <SideNav></SideNav>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, overflow: "auto" }}
+          sx={{ flexGrow: 1, p: 3, overflow: "auto", mt:8 }}
          
         >
-          <h1>Referral Cash Reward</h1>
+          {/* <h1>Referral Cash Reward</h1> */}
           <ReferralTable />
         </Box>
       </Box>
