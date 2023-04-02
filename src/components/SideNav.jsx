@@ -121,7 +121,7 @@ export default function SideNav() {
                   <GroupAddOutlinedIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Member List"
+                  primary="회원리스트"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
@@ -150,7 +150,7 @@ export default function SideNav() {
                   <ShoppingCartCheckoutSharpIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Coin Order History"
+                  primary="코인 주문 내역"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>
@@ -179,7 +179,7 @@ export default function SideNav() {
                   <CurrencyExchangeSharpIcon className="text-warning" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Referral Cash Reward"
+                  primary="캐시 보상 내역"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>

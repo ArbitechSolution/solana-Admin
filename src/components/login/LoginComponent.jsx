@@ -1,32 +1,35 @@
 import React, { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../NavBar";
 import SideNav from "../SideNav";
-// import { login } from "../../Redux/auth/actions";
+import { login } from "../../store/auth/actions";
 // import API from "../../config";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const LoginComponent = () => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  // const handleLogin = async () => {
-  //   try {
-  //     let userData = await API.post("/api/auth/login", {
-  //       email: email,
-  //       password: password,
-  //     });
-  //     localStorage.setItem("token", userData.data.data.token);
-  //     dispatch(login(userData.data.data));
-  //     navigate("/mypage");
-  //     toast.success("Login successfully");
-  //   } catch (e) {
-  //     console.log("error while login");
-  //   }
-  // };
+  const handleLogin = async () => {
+    try {
+      // let userData = await API.post("/api/auth/login", {
+      //   email: email,
+      //   password: password,
+      // });
+      // localStorage.setItem("token", userData.data.data.token);
+      dispatch(login({
+          email: email,
+           password: password,
+         }));
+      // navigate("/MemberList");
+      // toast.success("Login successfully");
+    } catch (e) {
+      console.log("error while login",e);
+    }
+  };
   return (
     <div>
 
@@ -51,8 +54,8 @@ const LoginComponent = () => {
                           className="form-control rounded-1 mb-4"
                           placeholder="Enter email"
                           required
-                          // onChange={(e) => setEmail(e.target.value)}
-                          // value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          value={email}
                         />
                       </div>
                       <div className="form-label-group  my-2">
@@ -62,8 +65,8 @@ const LoginComponent = () => {
                           className="form-control rounded-1 "
                           placeholder="Password"
                           required
-                          // onChange={(e) => setPassword(e.target.value)}
-                          // value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          value={password}
                         />
                       </div>
 
@@ -78,7 +81,7 @@ const LoginComponent = () => {
                       <div className="text-center">
                         <button
                           type="button"
-                          // onClick={() => handleLogin()}
+                          onClick={() => handleLogin()}
                           className="btn btn-success text-center rounded-1 form-control text-white my-md-4"
                         >
                           Sign In <i className="fa fa-paper-plane px-1"></i>

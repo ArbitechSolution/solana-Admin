@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,309 +8,133 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import MemberSearchBar from "../SearBars/MemberSearchBar";
-
+import { resolveAfter2Seconds } from "../../constant"
+import {formatNumber} from "../../constant"
+import Api from "../../config"
 const columns = [
-  { id: "name", label: "Name", minWidth: 200 },
-  { id: "id", label: "\u00a0ID", minWidth: 100 },
+  { id: "fullName", label: "이름", minWidth: 200 },
+  // { id: "id", label: "\u00a0ID", minWidth: 100 },
   {
-    id: "Phone",
-    label: "Phone",
+    id: "phoneNumber",
+    label: "연락처",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "Email",
-    label: "Email",
+    id: "email",
+    label: "이메일",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "Deposit",
-    label: "Deposit Wallet",
+    id: "walletAddress",
+    label: "입금지갑",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "Deposit_Amount",
-    label: "Deposit Amount(won)",
+    id: "coinAmount",
+    label: "코인수량",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "Total_Coin",
-    label: "Total Coin",
+    id: "totalLockedPurchasedCoin",
+    label: "락업코인",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "LookUp_Coin",
-    label: "LookUp_Coin",
+    id: "totalRewardCoin",
+    label: "캐시보상 전체",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "Total_Cash",
-    label: "Total Cash",
+    id: "totalLockedRewardCoin",
+    label: "캐시보상 락업",
     minWidth: 200,
     align: "left",
   },
   {
-    id: "LookUp_Cash",
-    label: "LookUp Cash",
+    id: "refCode",
+    label: "초대코드",
     minWidth: 200,
     align: "left",
   },
-  {
-    id: "Invitation_code",
-    label: "Invitation code",
-    minWidth: 200,
-    align: "left",
-  },
-];
-
-function createData(
-  name,
-  id,
-  Phone,
-  Email,
-  Deposit,
-  Deposit_Amount,
-  Total_Coin,
-  LookUp_Coin,
-  Total_Cash,
-  LookUp_Cash,
-  Invitation_code
-) {
-  return {
-    name,
-    id,
-    Phone,
-    Email,
-    Deposit,
-    Deposit_Amount,
-    Total_Coin,
-    LookUp_Coin,
-    Total_Cash,
-    LookUp_Cash,
-    Invitation_code,
-  };
-}
-
-const rows = [
-  createData(
-    "India",
-    "IN",
-    1324171354,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "China",
-    "CN",
-    1403500365,
-    9596961,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Italy",
-    "IT",
-    60483973,
-    301340,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "United States",
-    "US",
-    327167434,
-    9833520,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Canada",
-    "CA",
-    37602103,
-    9984670,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Australia",
-    "AU",
-    25475400,
-    7692024,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Germany",
-    "DE",
-    83019200,
-    357578,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Ireland",
-    "IE",
-    4857000,
-    70273,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Mexico",
-    "MX",
-    126577691,
-    1972550,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Japan",
-    "JP",
-    126320000,
-    377973,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "France",
-    "FR",
-    67022000,
-    640679,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "United Kingdom",
-    "GB",
-    67545757,
-    242495,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Russia",
-    "RU",
-    146793744,
-    20098246,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Nigeria",
-    "NG",
-    200962417,
-    923768,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
-  createData(
-    "Brazil",
-    "BR",
-    210147125,
-    8515767,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263,
-    3287263
-  ),
 ];
 
 export default function MemberListTable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [memberData, setMemberData] = useState([])
+  const [totalCount, seTotalCount] = useState(0)
+  const handleChangePage = async (event, newPage) => {
+    try {
+      setPage(newPage);
+      let { data } = await Api.post("admin/getAllUsers", {
+        "page": ++newPage,
+        "limit": rowsPerPage
+      })
+      setMemberData(data.data.users)
+    } catch (error) {
+      console.error("error while handle change page", error);
+    }
   };
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const getMemberList = async () => {
+    try {
+      let { data } = await Api.post("admin/getAllUsers", {
+        "page": 1,
+        "limit": rowsPerPage
+      })
+      for(let i = 0; i<data.data.users.length; i++ ){
+        data.data.users[i].totalLockedPurchasedCoin = formatNumber(data.data.users[i].totalLockedPurchasedCoin)
+        data.data.users[i].totalRewardCoin = formatNumber(data.data.users[i].totalRewardCoin)
+        data.data.users[i].totalLockedRewardCoin = formatNumber(data.data.users[i].totalLockedRewardCoin)
+        data.data.users[i].coinAmount = formatNumber(data.data.users[i].coinAmount)
+      
+      }
+      setMemberData(data.data.users)
+      seTotalCount(data.meta.totalCount)
+    } catch (error) {
+      console.error("error while get member list", error);
+    }
+  }
+  useEffect(() => {
+    getMemberList()
+  }, [rowsPerPage])
+  const searchWithName = async (value) => {
+    try {
+      await resolveAfter2Seconds(1000);
+      if (value.length > 1) {
+        let { data } = await Api.post("admin/getAllUsers", {
+          "page": 1,
+          "limit": rowsPerPage,
+          name: value
+        })
+        setMemberData(data.data.users)
+        seTotalCount(data.meta.totalCount)
+      } else if (value.length < 1) {
+        let { data } = await Api.post("admin/getAllUsers", {
+          "page": 1,
+          "limit": rowsPerPage
+        })  
+        setMemberData(data.data.users)
+        seTotalCount( data.meta.totalCount)
+      }
+    } catch (error) {
+      console.error("search with name", error);
+    }
+  }
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <MemberSearchBar></MemberSearchBar>
-      <TableContainer className="navBarBg121 text-warning"sx={{ maxHeight: 440 }}>
+      <MemberSearchBar searchWithName={searchWithName} />
+      {memberData.length > 0 && <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -327,11 +151,11 @@ export default function MemberListTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+            {memberData
+              // .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
@@ -347,16 +171,16 @@ export default function MemberListTable() {
               })}
           </TableBody>
         </Table>
-      </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+      </TableContainer>}
+      {memberData.length > 0 && <TablePagination
+        rowsPerPageOptions={[5, 10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={totalCount}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
+      />}
     </Paper>
   );
 }

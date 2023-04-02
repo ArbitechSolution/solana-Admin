@@ -47,7 +47,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function MemberSearchBar() {
+export default function MemberSearchBar({searchWithName}) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -62,6 +62,7 @@ export default function MemberSearchBar() {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+            onChange={(e)=>{searchWithName(e.target.value);}}
               placeholder="Search with name…"
               inputProps={{ "aria-label": "search" }}
             />

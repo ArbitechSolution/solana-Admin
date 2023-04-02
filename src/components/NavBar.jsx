@@ -183,7 +183,7 @@ export default function NavBar() {
           </IconButton>
           <CanvousNavbar />
           <Typography variant="h6" noWrap component="div"  >
-          <Link to="/MemberList" className="text-warning text-decoration-none"> Coin Buy</Link> 
+          <Link to="/MemberList" className="text-warning text-decoration-none fs-3 fw-bold"> PRIVATE SALE</Link> 
           </Typography>
           {/* <Search sx={{ display: { xs: "none", sm: "block" } }}>
             <SearchIconWrapper>
