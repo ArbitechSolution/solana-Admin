@@ -15,6 +15,7 @@ import ListItemText from "@mui/material/ListItemText";
 import GroupAddOutlinedIcon from "@mui/icons-material/GroupAddOutlined";
 import ShoppingCartCheckoutSharpIcon from "@mui/icons-material/ShoppingCartCheckoutSharp";
 import CurrencyExchangeSharpIcon from "@mui/icons-material/CurrencyExchangeSharp";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate } from "react-router-dom";
 import { useAppStore } from "../appStore";
 
@@ -80,9 +81,9 @@ export default function SideNav() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <div className=" d-none d-md-block " >
+      <div className=" d-none d-md-block ">
         <Drawer variant="permanent" open={open} className="sideBarBG">
-          <DrawerHeader >
+          <DrawerHeader>
             <IconButton
               onClick={() => {
                 updateOpen(!open);
@@ -96,7 +97,7 @@ export default function SideNav() {
             </IconButton>
           </DrawerHeader>
           <Divider />
-          <List >
+          <List>
             <ListItem
               disablePadding
               sx={{ display: "block" }}
@@ -180,6 +181,35 @@ export default function SideNav() {
                 </ListItemIcon>
                 <ListItemText
                   primary="캐시 보상 내역"
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
+              </ListItemButton>
+            </ListItem>
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => {
+                navigate("/settings");
+              }}
+            >
+              <ListItemButton
+                sx={{
+                  minHeight: 48,
+                  justifyContent: open ? "initial" : "center",
+                  px: 2.5,
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : "auto",
+                    justifyContent: "center",
+                  }}
+                >
+                  <SettingsIcon className="text-warning" />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Settings"
                   sx={{ opacity: open ? 1 : 0 }}
                 />
               </ListItemButton>

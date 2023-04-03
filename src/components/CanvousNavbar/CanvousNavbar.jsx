@@ -3,7 +3,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 const CanvousNavbar = () => {
   return (
-    <div className="d-block d-md-none" style={{backgroundColor:"red"}}>
+    <div className="d-block d-md-none" style={{ backgroundColor: "red" }}>
       <a
         className="text-light me-2"
         data-bs-toggle="offcanvas"
@@ -22,9 +22,9 @@ const CanvousNavbar = () => {
       >
         <div className="offcanvas-header">
           <h5 className="offcanvas-title text-white" id="offcanvasExampleLabel">
-          <a className="navbar-brand fs-3 fw-bold" href="/MemberList">
-        PRIVATE SALE
-        </a>
+            <a className="navbar-brand fs-3 fw-bold" href="/MemberList">
+              PRIVATE SALE
+            </a>
           </h5>
           <button
             type="button"
@@ -33,10 +33,14 @@ const CanvousNavbar = () => {
             aria-label="Close"
           />
         </div>
-        <div className="offcanvas-body " >
+        <div className="offcanvas-body ">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-start ">
             <li class="nav-item">
-              <Link class="nav-link text-white" aria-current="page" to="/MemberList">
+              <Link
+                class="nav-link text-white"
+                aria-current="page"
+                to="/MemberList"
+              >
                 {/* Members List */}
                 회원리스트
               </Link>
@@ -58,6 +62,16 @@ const CanvousNavbar = () => {
                 to="/referralcashreward"
               >
                 캐시보상 내역
+                {/* Referral Cash Reward */}
+              </Link>
+            </li>
+            <li class="nav-item">
+              <Link
+                class="nav-link text-white"
+                aria-current="page"
+                to="/settings"
+              >
+               Settings
                 {/* Referral Cash Reward */}
               </Link>
             </li>
