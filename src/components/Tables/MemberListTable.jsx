@@ -66,14 +66,23 @@ const columns = [
 
 export default function MemberListTable() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [memberData, setMemberData] = useState([])
   const [totalCount, seTotalCount] = useState(0)
+  let [nextPage, setNextPage] = useState(1)
   const handleChangePage = async (event, newPage) => {
     try {
+      let inPage = newPage;
+      if (newPage < page) {
+        inPage = --nextPage;
+        setNextPage(inPage)
+      } else {
+        inPage = ++nextPage
+        setNextPage(inPage)
+      }
       setPage(newPage);
       let { data } = await Api.post("admin/getAllUsers", {
-        "page": ++newPage,
+        "page": inPage,
         "limit": rowsPerPage
       })
       setMemberData(data.data.users)

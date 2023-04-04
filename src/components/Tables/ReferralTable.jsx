@@ -11,7 +11,7 @@ import ReferralSearchBar from "../SearBars/ReferralSearchBar";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import Api from "../../config"
 import { toast } from "react-toastify"
-import {formatNumber} from "../../constant"
+import { formatNumber } from "../../constant"
 const columns = [
   { id: "createdAt", label: "일자", minWidth: 200 },
   { id: "fullName", label: "이름", minWidth: 200 },
@@ -44,41 +44,58 @@ const columns = [
 
 
 export default function ReferralTable() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [totalCount, seTotalCount] = useState(0)
-  const [filter, setFilter] = useState(0)
-  const [referralHistory, setreferralHistory] = useState([])
-  const [userUpdateHistory, setUserUpdateHistory] = useState({
+  let [page, setPage] = useState(0);
+  let [rowsPerPage, setRowsPerPage] = useState(100);
+  let [totalCount, seTotalCount] = useState(0)
+  let [filter, setFilter] = useState("all")
+  let [nextPage, setNextPage] = useState(1)
+  let [referralHistory, setreferralHistory] = useState([])
+  let [userUpdateHistory, setUserUpdateHistory] = useState({
     status: null,
     id: null
   })
   const statusFormat = (item) => {
     return item == 0
-    ? "입금대기"
-    : item == 1
-      ? "락업기간"
-      : item == 2
-        ? "출금가능"
-        : item == 3
-          ? "출금대기"
-          : "출금완료"
+      ? "입금대기"
+      : item == 1
+        ? "락업기간"
+        : item == 2
+          ? "출금가능"
+          : item == 3
+            ? "출금대기"
+            : "출금완료"
   }
   const handleChangePage = async (event, newPage) => {
     try {
+      let inPage = newPage;
+      if (newPage < page) {
+        inPage = --nextPage;
+        setNextPage(inPage)
+      } else {
+        inPage = ++nextPage
+        setNextPage(inPage)
+      }
       setPage(newPage);
-      let { data } = await Api.post("admin/getAllReferralCashRewardHistory", {
-        "page": ++page,
-        "limit": rowsPerPage,
-        "status": filter
-      })
+      let { data } = await Api.post("admin/getAllReferralCashRewardHistory",
+        filter == "all" ? {
+          "page": ++page,
+          "limit": rowsPerPage
+        }
+          :
+          {
+            "page": ++page,
+            "limit": rowsPerPage,
+            "status": filter
+          }
+      )
+      console.log("data.data", data.data);
       for (let i = 0; i < data.data.length; i++) {
         data.data[i].createdAt = new Date(parseInt(data.data[i]._id.toString().substring(0, 8), 16) * 1000).toLocaleDateString() + " " + new Date(parseInt(data.data[i]._id.toString().substring(0, 8), 16) * 1000).toLocaleTimeString()
         data.data[i].fullName = data.data[i].referredTo.fullName;
         data.data[i].walletAddress = data.data[i].referredTo.walletAddress;
         data.data[i].statusSign = statusFormat(data.data[i].status)
         data.data[i].depositedWon = formatNumber(data.data[i].depositedWon)
-      data.data[i].coinAmount = formatNumber(data.data[i].coinAmount)
+        data.data[i].myReward = formatNumber(data.data[i].myReward)
       }
       setreferralHistory(data.data)
     } catch (error) {
@@ -92,18 +109,27 @@ export default function ReferralTable() {
   };
   const getReferralHistory = async () => {
     try {
-      let { data } = await Api.post("admin/getAllReferralCashRewardHistory", {
-        "page": "1",
-        "limit": rowsPerPage,
-        "status": filter
-      })
+      let { data } = await Api.post("admin/getAllReferralCashRewardHistory",
+        filter == "all" ?
+          {
+            "page": "1",
+            "limit": rowsPerPage
+          }
+          : {
+            "page": "1",
+            "limit": rowsPerPage,
+            "status": filter
+
+          }
+      )
+      console.log("data", data.data);
       for (let i = 0; i < data.data.length; i++) {
         data.data[i].createdAt = new Date(parseInt(data.data[i]._id.toString().substring(0, 8), 16) * 1000).toLocaleDateString() + " " + new Date(parseInt(data.data[i]._id.toString().substring(0, 8), 16) * 1000).toLocaleTimeString()
         data.data[i].fullName = data.data[i].referredTo.fullName;
         data.data[i].walletAddress = data.data[i].referredTo.walletAddress;
         data.data[i].statusSign = statusFormat(data.data[i].status)
         data.data[i].depositedWon = formatNumber(data.data[i].depositedWon)
-      data.data[i].myReward = formatNumber(data.data[i].myReward)
+        data.data[i].myReward = formatNumber(data.data[i].myReward)
       }
       setreferralHistory(data.data)
       seTotalCount(data.meta.totalCount)
@@ -135,7 +161,7 @@ export default function ReferralTable() {
   }
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <ReferralSearchBar filterAciton={setFilter} />
+      <ReferralSearchBar filterAciton={setFilter} filter={filter} />
       {referralHistory.length > 0 && <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -154,7 +180,7 @@ export default function ReferralTable() {
           </TableHead>
           <TableBody>
             {referralHistory
-              .map((row) => {
+              .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
@@ -168,12 +194,12 @@ export default function ReferralTable() {
                         </TableCell>
                       );
                     })}
-                    <button type="button" className="btn  btn-outline-warning shadow-none" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                    <button type="button" className="btn  btn-outline-warning shadow-none" data-bs-toggle="modal" data-bs-target={`#exampleModal${index}`}>
                       <BorderColorIcon />
                     </button>
 
                     {/* <!-- Modal --> */}
-                    <div className="modal fade" id="exampleModal2" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade" id={`exampleModal${index}`} tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                           <div className="modal-header">
@@ -184,26 +210,26 @@ export default function ReferralTable() {
                             <select className="form-select" name="" id="" value={row.status}
                               onChange={(e) => { setUserUpdateHistory({ status: e.target.value, id: row._id }); }}
                             >
-                              <option value="0"> 
-                              입금대기
-                              {/* Deposite pending */}
+                              <option value="0">
+                                입금대기
+                                {/* Deposite pending */}
                               </option>
                               <option value="1">
-                              락업기간
+                                락업기간
                                 {/* LockedUp */}
-                                </option>
+                              </option>
                               <option value="2">
-                              출금가능
+                                출금가능
                                 {/* Withdraw Available */}
-                                </option>
+                              </option>
                               <option value="3">
-                              출금대기
+                                출금대기
                                 {/* Withdraw Pending */}
-                                </option>
+                              </option>
                               <option value="4">
-                              출금완료
+                                출금완료
                                 {/* Withdrawal complete */}
-                                </option>
+                              </option>
                             </select>
                           </div>
                           <div className="d-flex justify-content-around mb-5 px-3" style={{ gap: "12px" }}>

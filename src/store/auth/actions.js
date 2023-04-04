@@ -7,6 +7,8 @@ export const login = (data) => {
     try {
         let res = await Api.post("admin/login", data)
     localStorage.setItem("token", res.data.data.token)
+    console.log("res", res);
+
         toast.success(res.data.showableMessage)
         await resolveAfter2Seconds(1500)
         window.location.href = "/MemberList";
