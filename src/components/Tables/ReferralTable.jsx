@@ -162,7 +162,7 @@ export default function ReferralTable() {
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <ReferralSearchBar filterAciton={setFilter} filter={filter} />
-      {referralHistory.length > 0 && <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 440 }}>
+      {referralHistory.length > 0 && <TableContainer className="navBarBg121 text-warning" sx={{ maxHeight: 800 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

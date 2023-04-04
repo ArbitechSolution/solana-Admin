@@ -6,15 +6,14 @@ import MemberListTable from "../components/Tables/MemberListTable";
 
 const MemberList = () => {
   return (
-    <div>
+    <div sx={{ overflowY: "auto" }}>
       <NavBar></NavBar>
       <Box height={70} />
       <Box sx={{ display: "flex" }}>
         <SideNav></SideNav>
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, overflow: "auto", mt:8 }}
-          
+          sx={{ flexGrow: 1, p: 3, overflow: "auto", mt: 8 }}
         >
           {/* <h1>Members List</h1> */}
           <MemberListTable></MemberListTable>

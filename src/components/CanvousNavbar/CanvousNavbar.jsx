@@ -71,7 +71,7 @@ const CanvousNavbar = () => {
                 aria-current="page"
                 to="/settings"
               >
-               Settings
+                Settings
                 {/* Referral Cash Reward */}
               </Link>
             </li>
