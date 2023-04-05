@@ -12,8 +12,8 @@ import { resolveAfter2Seconds } from "../../constant"
 import {formatNumber} from "../../constant"
 import Api from "../../config"
 const columns = [
-  { id: "fullName", label: "이름", minWidth: 200 },
-  // { id: "id", label: "\u00a0ID", minWidth: 100 },
+  { id: "fullName", label: "ID", minWidth: 200 },
+  { id: "createdAt", label: "가입일자", minWidth: 100 },
   {
     id: "phoneNumber",
     label: "연락처",
@@ -85,6 +85,20 @@ export default function MemberListTable() {
         "page": inPage,
         "limit": rowsPerPage
       })
+      for(let i = 0; i<data.data.users.length; i++ ){
+        data.data.users[i].createdAt =
+					new Date(
+						parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+					).toLocaleDateString() +
+					' ' +
+					new Date(
+						parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+					).toLocaleTimeString();
+        data.data.users[i].totalLockedPurchasedCoin = formatNumber(data.data.users[i].totalLockedPurchasedCoin)
+        data.data.users[i].totalRewardCoin = formatNumber(data.data.users[i].totalRewardCoin)
+        data.data.users[i].totalLockedRewardCoin = formatNumber(data.data.users[i].totalLockedRewardCoin)
+        data.data.users[i].coinAmount = formatNumber(data.data.users[i].coinAmount)
+      }
       setMemberData(data.data.users)
     } catch (error) {
       console.error("error while handle change page", error);
@@ -102,11 +116,18 @@ export default function MemberListTable() {
         "limit": rowsPerPage
       })
       for(let i = 0; i<data.data.users.length; i++ ){
+        data.data.users[i].createdAt =
+					new Date(
+						parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+					).toLocaleDateString() +
+					' ' +
+					new Date(
+						parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+					).toLocaleTimeString();
         data.data.users[i].totalLockedPurchasedCoin = formatNumber(data.data.users[i].totalLockedPurchasedCoin)
         data.data.users[i].totalRewardCoin = formatNumber(data.data.users[i].totalRewardCoin)
         data.data.users[i].totalLockedRewardCoin = formatNumber(data.data.users[i].totalLockedRewardCoin)
         data.data.users[i].coinAmount = formatNumber(data.data.users[i].coinAmount)
-      
       }
       setMemberData(data.data.users)
       seTotalCount(data.meta.totalCount)
@@ -126,6 +147,20 @@ export default function MemberListTable() {
           "limit": rowsPerPage,
           name: value
         })
+        for(let i = 0; i<data.data.users.length; i++ ){
+          data.data.users[i].createdAt =
+            new Date(
+              parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+            ).toLocaleDateString() +
+            ' ' +
+            new Date(
+              parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+            ).toLocaleTimeString();
+          data.data.users[i].totalLockedPurchasedCoin = formatNumber(data.data.users[i].totalLockedPurchasedCoin)
+          data.data.users[i].totalRewardCoin = formatNumber(data.data.users[i].totalRewardCoin)
+          data.data.users[i].totalLockedRewardCoin = formatNumber(data.data.users[i].totalLockedRewardCoin)
+          data.data.users[i].coinAmount = formatNumber(data.data.users[i].coinAmount)
+        }
         setMemberData(data.data.users)
         seTotalCount(data.meta.totalCount)
       } else if (value.length < 1) {
@@ -133,6 +168,20 @@ export default function MemberListTable() {
           "page": 1,
           "limit": rowsPerPage
         })  
+        for(let i = 0; i<data.data.users.length; i++ ){
+          data.data.users[i].createdAt =
+            new Date(
+              parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+            ).toLocaleDateString() +
+            ' ' +
+            new Date(
+              parseInt(data.data.users[i]._id.toString().substring(0, 8), 16) * 1000
+            ).toLocaleTimeString();
+          data.data.users[i].totalLockedPurchasedCoin = formatNumber(data.data.users[i].totalLockedPurchasedCoin)
+          data.data.users[i].totalRewardCoin = formatNumber(data.data.users[i].totalRewardCoin)
+          data.data.users[i].totalLockedRewardCoin = formatNumber(data.data.users[i].totalLockedRewardCoin)
+          data.data.users[i].coinAmount = formatNumber(data.data.users[i].coinAmount)
+        }
         setMemberData(data.data.users)
         seTotalCount( data.meta.totalCount)
       }

@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { formatNumber } from '../../constant';
 const columns = [
 	{ id: 'createdAt', label: '일자', minWidth: 200 },
-	{ id: 'fullName', label: '이름', minWidth: 200 },
+	{ id: 'fullName', label: 'ID', minWidth: 200 },
 
 	{
 		id: 'walletAddress',
@@ -88,7 +88,6 @@ export default function ReferralTable() {
 							status: filter,
 					  }
 			);
-			console.log('data.data', data.data);
 			for (let i = 0; i < data.data.length; i++) {
 				data.data[i].createdAt =
 					new Date(
@@ -129,7 +128,6 @@ export default function ReferralTable() {
 							status: filter,
 					  }
 			);
-			console.log('data', data.data);
 			for (let i = 0; i < data.data.length; i++) {
 				data.data[i].createdAt =
 					new Date(

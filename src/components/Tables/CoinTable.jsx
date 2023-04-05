@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import { formatNumber } from '../../constant';
 const columns = [
 	{ id: 'createdAt', label: '일자', minWidth: 200 },
-	{ id: 'fullName', label: '이름', minWidth: 200 },
+	{ id: 'fullName', label: 'ID', minWidth: 200 },
 	{
 		id: 'walletAddress',
 		label: '입금지갑',
